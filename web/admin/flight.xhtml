@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+    </h:head>
     <body>
         Create a flight!
         <h:form>
+            <p:outputLabel for="dep" value="Departure"/>
+            <p:selectOneMenu id="dep" value="#{flightView.dep}">
+                <f:selectItems value="#{airportView.allAirports}" />
+            </p:selectOneMenu>
             
+            <br/>
+            <p:outputLabel for="arr" value="Arrival"/>
+            <p:selectOneMenu id="arr" value="#{flightView.arr}">
+                <f:selectItems value="#{airportView.allAirports}" />
+            </p:selectOneMenu>
+            <br/>
+            <p:outputLabel for="dep_time" value="Departure Time"/>
+            <p:calendar id="dep_time" value="#{flightView.dep_time}" pattern="HH:mm" timeOnly="true"  />
+            <br/>
+            <p:outputLabel for="arr_time" value="Arrival Time"/>
+            <p:calendar id="arr_time" value="#{flightView.arr_time}" pattern="HH:mm" timeOnly="true"  />
+            <p:commandButton value="Save" action=""/>
         </h:form>
+        
     </body>
 </html>

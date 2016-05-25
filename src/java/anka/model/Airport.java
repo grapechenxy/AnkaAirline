@@ -43,6 +43,12 @@ public class Airport implements Serializable
         this.name = name;
     }
     
+    @Override
+    public String toString()
+    {
+        return this.name;
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="Get&Set">
     public Long getId()
     {
