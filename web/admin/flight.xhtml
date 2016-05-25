@@ -23,12 +23,14 @@
                 <f:selectItems value="#{airportView.allAirports}" />
             </p:selectOneMenu>
             <br/>
+            
             <p:outputLabel for="dep_time" value="Departure Time"/>
             <p:calendar id="dep_time" value="#{flightView.dep_time}" pattern="HH:mm" timeOnly="true"  />
             <br/>
+            
             <p:outputLabel for="arr_time" value="Arrival Time"/>
             <p:calendar id="arr_time" value="#{flightView.arr_time}" pattern="HH:mm" timeOnly="true"  />
-            <p:commandButton value="Save" action=""/>
+            <p:commandButton action="#{flightView.save()}" value="Save" ></p:commandButton>
         </h:form>
         
     </body>

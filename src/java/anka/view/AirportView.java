@@ -39,7 +39,7 @@ public class AirportView
     
     public List<Airport> getAllAirports() 
     {
-        System.out.println(logic.getAllAirports().get(0).getName());
+        //System.out.println(logic.getAllAirports().get(0).getName());
         return logic.getAllAirports();
     }
 }

@@ -2,6 +2,7 @@ package anka.view;
 
 import anka.logic.FlightLogic;
 import anka.model.Airport;
+import anka.model.Flight;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -90,7 +91,10 @@ public class FlightView
     
     public void save()
     {
+        System.out.println("HEJ");
+        System.out.println(LocalTime.parse(dep_time.toString()));
+        
+        //Flight f1 = new Flight(dep, arr, dep_time, arr_time);
         
     }
-    
 }

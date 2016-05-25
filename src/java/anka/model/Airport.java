@@ -71,6 +71,4 @@ public class Airport implements Serializable
     }
 //</editor-fold>
     
-    
-    
 }
