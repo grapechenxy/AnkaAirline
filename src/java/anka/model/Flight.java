@@ -1,7 +1,8 @@
 package anka.model;
 
 import java.io.Serializable;
-import java.time.LocalTime;
+import java.sql.Date;
+import java.sql.Time;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,15 +27,15 @@ public class Flight implements Serializable
     private Airport departure;
     @ManyToOne
     private Airport arrival;
-    private LocalTime dep_time;
-    private LocalTime arr_time;
+    private Time dep_time;
+    private Time arr_time;
     
     public Flight()
     {
         
     }
     
-    public Flight(Airport dep, Airport arr, LocalTime dep_time, LocalTime arr_time)
+    public Flight(Airport dep, Airport arr, Time dep_time, Time arr_time)
     {
         this.departure = dep;
         this.arrival = arr;
@@ -63,22 +64,22 @@ public class Flight implements Serializable
         this.arrival = arrival;
     }
     
-    public LocalTime getDep_time()
+    public Time getDep_time()
     {
         return dep_time;
     }
     
-    public void setDep_time(LocalTime dep_time)
+    public void setDep_time(Time dep_time)
     {
         this.dep_time = dep_time;
     }
     
-    public LocalTime getArr_time()
+    public Time getArr_time()
     {
         return arr_time;
     }
     
-    public void setArr_time(LocalTime arr_time)
+    public void setArr_time(Time arr_time)
     {
         this.arr_time = arr_time;
     }

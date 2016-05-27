@@ -1,37 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </h:head>
-    <body>
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    template="admin_template.xhtml">
+          
+    <ui:define name="title">Flights</ui:define>
+    
+    <ui:define name="body">
         Create a flight!
+        <br /><br/>
         <h:form>
             <p:outputLabel for="dep" value="Departure"/>
-            <p:selectOneMenu id="dep" value="#{flightView.dep}">
-                <f:selectItems value="#{airportView.allAirports}" />
+            <p:selectOneMenu id="dep" value="#{flightView.depID}">
+                <f:selectItems value="#{flightView.allAirportIDs}" var="dep_airportID"
+                               itemLabel="#{flightView.getAirportFromID(dep_airportID).getName()}"  />
+                
             </p:selectOneMenu>
             
             <br/>
             <p:outputLabel for="arr" value="Arrival"/>
-            <p:selectOneMenu id="arr" value="#{flightView.arr}">
-                <f:selectItems value="#{airportView.allAirports}" />
+            <p:selectOneMenu id="arr" value="#{flightView.arrID}">
+                <f:selectItems value="#{flightView.allAirportIDs}" var="arr_airportID"
+                               itemLabel="#{flightView.getAirportFromID(arr_airportID).getName()}"  />
             </p:selectOneMenu>
             <br/>
             
             <p:outputLabel for="dep_time" value="Departure Time"/>
             <p:calendar id="dep_time" value="#{flightView.dep_time}" pattern="HH:mm" timeOnly="true"  />
-            <br/>
             
             <p:outputLabel for="arr_time" value="Arrival Time"/>
             <p:calendar id="arr_time" value="#{flightView.arr_time}" pattern="HH:mm" timeOnly="true"  />
-            <p:commandButton action="#{flightView.save()}" value="Save" ></p:commandButton>
+            <br/>
+
+            <br />
+            <p:commandButton actionListener="#{flightView.save()}" value="Save" ajax="false" ></p:commandButton>
         </h:form>
-        
-    </body>
-</html>
+    </ui:define>
+ 
+</ui:composition>

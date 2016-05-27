@@ -1,0 +1,27 @@
+/* 
+    Created on : 2016-maj-27, 13:37:18
+    Author     : Krille
+*/
+
+.wrapper{
+    width: 100%;
+}
+
+#header
+{
+    display: block;
+    height: 30px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    font-size: 16px;
+}
+
+#header a{
+    text-decoration: none;
+    padding-right: 10px;
+    
+}
+
+#header a:hover{
+    color: red;
+}

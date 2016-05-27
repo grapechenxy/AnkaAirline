@@ -1,17 +1,26 @@
 package anka.view;
 
+import anka.logic.AirportLogic;
 import anka.logic.FlightLogic;
 import anka.model.Airport;
 import anka.model.Flight;
+import java.io.Serializable;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
@@ -22,38 +31,22 @@ import org.primefaces.event.SelectEvent;
  */
 
 @Named(value = "flightView")
-@RequestScoped
-public class FlightView
+@ViewScoped
+public class FlightView implements Serializable
 {
     @EJB
     FlightLogic logic;
     
-    List<Airport> airports = new ArrayList<>();
+    @EJB
+    AirportLogic airlogic;
     
-    Airport dep;
-    Airport arr;
+    
+    List<Airport> airports;
+    Long depID;
+    Long arrID;
     Date dep_time;
     Date arr_time;
-
-    public Airport getDep()
-    {
-        return dep;
-    }
-
-    public void setDep(Airport dep)
-    {
-        this.dep = dep;
-    }
-
-    public Airport getArr()
-    {
-        return arr;
-    }
-
-    public void setArr(Airport arr)
-    {
-        this.arr = arr;
-    }
+    
 
     public Date getDep_time()
     {
@@ -74,7 +67,27 @@ public class FlightView
     {
         this.arr_time = arr_time;
     }
+    
+    public Long getDepID()
+    {
+        return depID;
+    }
 
+    public void setDepID(Long dep)
+    {
+        this.depID = dep;
+    }
+
+    public Long getArrID()
+    {
+        return arrID;
+    }
+
+    public void setArrID(Long arr)
+    {
+        this.arrID = arr;
+    }
+    
     
     public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -91,10 +104,36 @@ public class FlightView
     
     public void save()
     {
-        System.out.println("HEJ");
-        System.out.println(LocalTime.parse(dep_time.toString()));
+        Time sqlTime_dep = new Time(dep_time.getTime());
+        Time sqlTime_arr = new Time(arr_time.getTime());
         
-        //Flight f1 = new Flight(dep, arr, dep_time, arr_time);
-        
+        Flight f1 = new Flight(getAirportFromID(depID), getAirportFromID(arrID), sqlTime_dep, sqlTime_arr);
+        logic.save(f1);
+    }
+    
+    public List<Long> getAllAirportIDs() 
+    {
+        //System.out.println(logic.getAllAirports().get(0).getName());
+        airports = airlogic.getAllAirports();
+        List<Long> idlist = new ArrayList<>();
+        for(Airport air : airports)
+        {
+            idlist.add(air.getId());
+        }
+        return idlist;
+    }
+    
+    public Airport getAirportFromID(long id)
+    {
+        //System.out.println("Finding ID: " + id);
+        for(Airport air: airports)
+        {
+            if(air.getId() == id)
+            {
+                //System.out.println("Found: " + air.getName());
+                return air;   
+            }
+        }
+        return null;
     }
 }
