@@ -1,8 +1,7 @@
 package anka.logic;
 
-import anka.model.Airport;
 import anka.model.Booking;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -15,17 +14,41 @@ public class BookingLogic {
     @PersistenceContext
     EntityManager em;
     
-    public Booking toBook(String passengerName, LocalDateTime date, Airport ap){
-        Booking book = new Booking(passengerName, date, ap);
+  
+//        public void toBook(String passengerName, Date date, Flight flight){
+//        Booking book = new Booking(passengerName, date, flight);
+//        em.persist(book);
+//        
+//    }
+//        
+                
+    public void toBook(String passengerName, Date date){
+        Booking book = new Booking(passengerName, date);
         em.persist(book);
-        return book;
-    }
-    
-    public Booking findBooking(Long id){
-        return em.find(Booking.class, id);
         
     }
     
-   
+     public String editBooking(Booking booking){
+         booking.setCanEdit(true);
+         return null;
+     
+     }
+    
+    public Booking findBooking(Long id){
+        return em.find(Booking.class, id);
+    }
+    
+    public String toDelete(Long id){
+    em.remove(id);
+    return null;
+    
+    }
+    
+    public List<Booking> findAllBookings(){
+        TypedQuery<Booking> query = em.createNamedQuery("findAllBookings", Booking.class);
+        return query.getResultList();
+    }
+    
+  
     
 }

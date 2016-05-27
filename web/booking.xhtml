@@ -16,24 +16,23 @@
                     <p:outputLabel value="Booking Your Flight" />
                 </f:facet>
                 <p:outputLabel value="Full Name" />
-                <p:inputText value="#{BookingView.passengerName}" />
+                <p:inputText value="#{bookingView.passengerName}" />
                 
                 <p:outputLabel for="popup" value="Departure Date" />
-                <p:calendar id="popup" value="#{BookingView.date}" />
+                <p:calendar id="popup" value="#{bookingView.date}" />
                 
-                <p:outputLabel for="DepartureAirport" value="Departure Airport" />
-                <p:selectOneListbox id="DepartureAirport" value="#{airportView.name}">
-                    <f:selectItems value="#{airportView.allAirports}" var="ap" />
-                </p:selectOneListbox>
-                
-
-
+<!--                <p:outputLabel for="flight" value="Flight" />
+                <p:selectOneListbox id="flight" value="#{bookingView.flight}">
+                    <f:selectItems value="#{flightView.allFlight}" var="flight" />
+                    
+                </p:selectOneListbox>-->
 
             </p:panelGrid>
             
             
             
-            <p:commandButton value="Book" action="#{BookingView.doBook()}" />
+            <p:commandButton value="Book" actionListener="#{bookingView.doBook()}" />
+            
         </h:form>
     </h:body>
 </html>

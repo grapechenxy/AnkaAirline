@@ -3,11 +3,13 @@ package anka.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQuery(name = "findAllBookings",query= "SELECT b FROM Booking b")
@@ -18,18 +20,38 @@ public class Booking implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    
     private String passengerName;
-    private LocalDateTime date;
-    private Airport ap;
+    
+   
+    private Date date;
+    
+    
+    private Flight flight;
+    
+    private boolean canEdit;
+
+ 
+
+
+    
 
     public Booking(){}
     
-    public Booking(String passengerName, LocalDateTime date, Airport ap){
+    public Booking(String passengerName, Date date, Flight flight){
     this.passengerName = passengerName;
     this.date = date;
-    this.ap = ap;
+    this.flight = flight;
+    canEdit = false;
     }
     
+    public Booking(String passengerName, Date date){
+    this.passengerName = passengerName;
+    this.date = date;
+    canEdit = false;
+    
+    }
+
     public Long getId() {
         return id;
     }
@@ -46,21 +68,28 @@ public class Booking implements Serializable {
         this.passengerName = passengerName;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
-
-    public Airport getAp() {
-        return ap;
+    public Flight getFlight() {
+        return flight;
     }
 
-    public void setAp(Airport ap) {
-        this.ap = ap;
+    public void setFlight(Flight flight) {
+        this.flight = flight;
     }
     
+   public boolean isCanEdit() {
+        return canEdit;
+    }
+
+    public void setCanEdit(boolean canEdit) {
+        this.canEdit = canEdit;
+    }
+
     
 }

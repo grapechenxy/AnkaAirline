@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>All Booking Info</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            
+            <p:growl id="msgs" showDetail="true" />
+            
+            <p:dataTable var="booking" value="#{bookingView.bookings}" editable="true">
+                <f:facet name="header">Booking Data</f:facet>
+                
+                <p:ajax event="bookingEdit" listener="#{bookingView.onRowEdit}" update=":form:msgs" />
+                <p:ajax event="bookingCancel" listener="#{bookingView.onRowCancel}" update=":form:msgs" />
+                <p:column>
+                    <f:facet name="header">ID</f:facet>
+                   
+                    <h:outputText value="#{booking.id}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">Departure_Date</f:facet>
+                    <h:inputText value="#{booking.date}" rendered="#{booking.canEdit}" />
+                    <h:outputText value="#{booking.date}" rendered="#{not booking.canEdit}" />                   
+                </p:column>
+
+                <p:column>                  
+                    <f:facet name="header">Passenger</f:facet>
+                    <h:inputText value="#{booking.passengerName}" rendered="#{booking.canEdit}" />
+                    <h:outputText value="#{booking.passengerName}" rendered="#{not booking.canEdit}" />                   
+                </p:column>                
+                
+                <p:column>
+                    <f:facet name="header">Action</f:facet>
+                    
+                    <p:commandButton value="edit" action="#{bookingView.toEdit(booking)}" rendered="#{not booking.canEdit}"/>
+<!--                    <f:setPropertyActionListener target="#{bookingView.bookings}" value="#{booking}" />-->
+                    
+                    <p:commandButton value="delete" action="#{bookingView.doDelete(booking.id)}" />
+                    
+                </p:column>
+            </p:dataTable>
+            
+        </h:form>
+    </h:body>
+</html>
+
