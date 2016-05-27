@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+    <h:head>
+        <title>Booking</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panelGrid id="bookings" columns="2" >
+                
+                <f:facet name="header">
+                    <p:outputLabel value="Booking Your Flight" />
+                </f:facet>
+                <p:outputLabel value="Full Name" />
+                <p:inputText value="#{BookingView.passengerName}" />
+                
+                <p:outputLabel for="popup" value="Departure Date" />
+                <p:calendar id="popup" value="#{BookingView.date}" />
+                
+                <p:outputLabel for="DepartureAirport" value="Departure Airport" />
+                <p:selectOneListbox id="DepartureAirport" value="#{airportView.name}">
+                    <f:selectItems value="#{airportView.allAirports}" var="ap" />
+                </p:selectOneListbox>
+                
+
+
+
+            </p:panelGrid>
+            
+            
+            
+            <p:commandButton value="Book" action="#{BookingView.doBook()}" />
+        </h:form>
+    </h:body>
+</html>
+
